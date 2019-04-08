@@ -17,7 +17,7 @@ pipeline {
                 sh '''
                 cd main
                 terraform init -input=false
-                terraform apply -var aws_access_key=$aws_access_key -var aws_secret_key=$aws_secret_key
+                terraform apply -var aws_access_key=$AWS_ACCESS_KEY_ID -var aws_secret_key=$AWS_SECRET_ACCESS_KEY
                 '''
             }
         }
