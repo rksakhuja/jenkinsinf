@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                 cd main
                 terraform init -input=false
-                terraform apply -auto-approve
+                terraform apply -input=false
                 '''
             }
         }
