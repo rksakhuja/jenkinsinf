@@ -1,6 +1,9 @@
 provider "aws" {
     region = "${var.region}"
+    access_key = "${var.aws_access_key}"
+    secret_key = "${var.aws_secret_key}"
 }
+
 module "jenkins_network" {
     source = "../modules/network"
     # vpc_id is generated when the vpc is created and we define it here to allow it to be used in another module
