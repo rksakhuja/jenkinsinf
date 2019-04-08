@@ -1,3 +1,3 @@
 region = "us-east-1"
-aws_access_key = "${env.aws_access_key}"
-aws_secret_key = "${env.aws_secret_key}"
+aws_access_key = "${AWS_ACCESS_KEY_ID}"
+aws_secret_key = "${env.AWS_SECRET_ACCESS_KEY}"
