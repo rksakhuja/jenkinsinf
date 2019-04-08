@@ -1,0 +1,48 @@
+---
+#- name: add repo for jenkins
+ # yum_repository:
+ #   name: jenkins
+ #   description: jenkins repo
+ #   baseurl: http://pkg.jenkins.io/redhat/jenkins.repo
+ #   state: present
+#- name: Import Jenkins Key
+ # rpm_key:
+ #   state: present
+ #   key: https://pkg.jenkins.io/redhat/jenkins.io.key
+- name: remove existing java
+  yum:
+    name: java
+    state: removed
+- name: install java 1.8 jdk
+  yum:
+    name: java-1.8.0
+    state: present
+- name: example copying file with owner and permissions
+  copy:
+    src: /Users/rohitk@kainos.com/Downloads/jenkins-2.164.1-1.1.noarch.rpm
+    dest: /etc/
+    owner: ec2-user
+
+- name: install the jenkins rpm local to the machine
+  yum:
+    name: /etc/jenkins-2.164.1-1.1.noarch.rpm
+    state: present
+    
+#- name: install jenkins
+ # yum:
+ #   name: jenkins
+ #   state: latest
+- name: Start service jenkins, if not started
+  service:
+    name: jenkins
+    state: restarted
+- name: Wait for port 8080 to become open on the host, don't start checking for 10 seconds
+  wait_for:
+    port: 8080
+    delay: 10
+- name: get jenkins password
+  command: cat /var/lib/jenkins/secrets/initialAdminPassword
+  register: output
+
+- name: print Jenkins password
+  debug: var={{"output.stdout"}}

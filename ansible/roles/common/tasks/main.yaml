@@ -1,0 +1,11 @@
+- name: create users
+  user: 
+    name: "{{item}}"
+    state: present
+    generate_ssh_key: false
+  loop:
+    - joe
+    - steven
+    - rohit
+    - dula
+    - alyas

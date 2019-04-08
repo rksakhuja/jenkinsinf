@@ -1,0 +1,10 @@
+variable "instance_type" {}
+variable "jenkins_master_name" {}
+variable "ami" {}
+variable "slaves_count" {}
+variable "subnet_id" {}
+variable "vpc_id" {}
+variable "eip_id" {}
+variable "eip_dns" {}
+variable "sgrp_id" {}
+variable "key_name" {}

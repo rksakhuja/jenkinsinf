@@ -1,0 +1,7 @@
+- name: install applications
+  yum:
+    name: "{{item.package}}"
+    state: "{{item.installed}}"
+  loop:
+        - package: httpd
+          installed: present

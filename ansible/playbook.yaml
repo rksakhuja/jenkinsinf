@@ -1,0 +1,12 @@
+---
+# - hosts: slave
+#   roles:
+#     - webserver
+- hosts: master
+  roles:
+    - jenkins
+  vars:
+    jenkinspassword: "string"
+# - hosts: all
+#   roles:
+#     - common
