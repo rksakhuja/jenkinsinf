@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        AWS_ACCESS_KEY_ID     = credentials('AKIA6DQLRDHQDD2J35OQ')
-        
-    }
     stages {
         
         stage('1 - Checkout') {
@@ -17,7 +13,7 @@ pipeline {
                 sh '''
                 cd main
                 terraform init -input=false
-                terraform apply
+                terraform apply -var aws_access_key=$aws_access_key -var aws_secret_key=$aws_secret_key
                 '''
             }
         }
