@@ -4,10 +4,6 @@ pipeline {
     stages {
         
         stage('1 - Checkout') {
-            
-            
-            
-            
             steps {
                 echo 'downloading files..'
                 git url: 'https://github.com/rksakhuja/jenkinsinf', branch: 'master'
