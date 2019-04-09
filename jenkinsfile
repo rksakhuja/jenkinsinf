@@ -14,8 +14,8 @@ pipeline {
         }
         stage('2 - init/apply') {
             steps {
-                // withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
-                // string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
+                string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')])
                 sh ''''
                 echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
                 echo "my key_id is: $AWS_ACCESS_KEY_ID"
@@ -29,5 +29,4 @@ pipeline {
         }
         
     }
-}
 }
