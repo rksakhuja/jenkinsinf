@@ -17,6 +17,7 @@ pipeline {
         stage('2 - init/apply') {
             steps {
                 sh '''
+                echo $AWS_SECRET_ACCESS_KEY
                 cd main
                 terraform init -input=false
                 export aws_access_key=$AWS_ACCESS_KEY_ID
