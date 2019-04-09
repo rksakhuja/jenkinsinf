@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         AWS_SECRET_ACCESS_KEY = credentials('AKIA6DQLRDHQDD2J35OQ')
-        AWS_ACCESS_KEY_ID = ('AKIA6DQLRDHQDD2J35OQ')
+        AWS_ACCESS_KEY_ID = 'AKIA6DQLRDHQDD2J35OQ'
 
         
     }
@@ -17,7 +17,8 @@ pipeline {
         stage('2 - init/apply') {
             steps {
                 sh '''
-                echo "my key is: $AWS_SECRET_ACCESS_KEY"
+                echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
+                echo "my key_id is: $AWS_ACCESS_KEY_ID"
                 cd main
                 terraform init -input=false
                 export aws_access_key=$AWS_ACCESS_KEY_ID
