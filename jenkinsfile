@@ -17,6 +17,7 @@ pipeline {
         stage('2 - init/apply') {
             steps {
                 sh '''
+                echo "this is my ID? $rohit_jenkins"
                 echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
                 echo "my key_id is: $AWS_ACCESS_KEY_ID"
                 cd main
