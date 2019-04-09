@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        AWS_SECRET_ACCESS_KEY = credentials("$rohit_aws_secret")
+        AWS_ACCESS_KEY_ID = credentials("$rohit_aws_key")
+
+        
+    }
+    stages {
+        
+        stage('1 - Checkout') {
+            steps {
+                echo 'downloading files..'
+                git url: 'https://github.com/rksakhuja/jenkinsinf', branch: 'master'
+            }
+        }
+        stage('2 - init/apply') {
+            steps {
+                sh '''
+                echo "this is my ID? $rohit_jenkins"
+                echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
+                echo "my key_id is: $AWS_ACCESS_KEY_ID"
+                cd main
+                terraform init -input=false
+                export aws_access_key=$AWS_ACCESS_KEY_ID
+                export aws_secret_key=AWS_SECRET_ACCESS_KEY
+                terraform apply
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}

@@ -1,37 +1,28 @@
-pipeline {
-    agent any
-    environment {
-        AWS_SECRET_ACCESS_KEY = credentials("$rohit_aws_secret")
-        AWS_ACCESS_KEY_ID = credentials("$rohit_aws_key")
+node {
+  environment {
+      AWS_ACCESS_KEY_ID     = credentials("$rohit_aws_key")
+      AWS_SECRET_ACCESS_KEY = credentials("$rohit_aws_secret")
+  }
+ stage('checkout') { // for display purposes
+    // Get some code from a GitHub repository
+    git 'https://github.com/rksakhuja/jenkinsinf'
+ }
+ stage('Terraform Init') {
+  // Run Terraform init command from within specific directory listed in dir command Old:OpsAcademy-Terraform/aws/environment/dev
+  dir("main"){
+  sh "terraform init"
+ }
+ }
+ stage ('Terraform Apply') {
+    withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
+                     string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+      sh """
+       export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+       export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+       set +x
+       cd main && terraform apply -auto-approve
 
-        
-    }
-    stages {
-        
-        stage('1 - Checkout') {
-            steps {
-                echo 'downloading files..'
-                git url: 'https://github.com/rksakhuja/jenkinsinf', branch: 'master'
-            }
-        }
-        stage('2 - init/apply') {
-            steps {
-                sh '''
-                echo "this is my ID? $rohit_jenkins"
-                echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
-                echo "my key_id is: $AWS_ACCESS_KEY_ID"
-                cd main
-                terraform init -input=false
-                export aws_access_key=$AWS_ACCESS_KEY_ID
-                export aws_secret_key=AWS_SECRET_ACCESS_KEY
-                terraform apply
-                '''
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+       """
+     }
+  }
 }
