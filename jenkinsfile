@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      AWS_ACCESS_KEY_ID     = credentials("$rohit-aws-key")
-      AWS_SECRET_ACCESS_KEY = credentials("$rohit-aws-secret")
+      AWS_ACCESS_KEY_ID     = credentials("$rohit_aws_key")
+      AWS_SECRET_ACCESS_KEY = credentials("$rohit_aws_secret")
      }
     stages {
         
