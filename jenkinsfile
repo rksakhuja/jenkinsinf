@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      AWS_ACCESS_KEY_ID     = credentials("$db_aws_access_key")
-      AWS_SECRET_ACCESS_KEY = credentials("$db_aws_secret_key")
+      AWS_ACCESS_KEY_ID     = credentials("$rohit-aws-key")
+      AWS_SECRET_ACCESS_KEY = credentials("$rohit-aws-secret")
      }
     stages {
         
@@ -16,8 +16,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'db_aws_access_key', variable: 'AWS_ACCESS_KEY_ID'),
                 string(credentialsId: 'db_aws_secret_key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh '''
-                echo "this is my ID? $rohit_jenkins"
+                sh ''''
                 echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
                 echo "my key_id is: $AWS_ACCESS_KEY_ID"
                 cd main
