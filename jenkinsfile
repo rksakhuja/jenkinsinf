@@ -17,8 +17,8 @@ node {
     withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
                      string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')]) {
       sh """
-       export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
-       export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+       export aws_access_key="$AWS_ACCESS_KEY_ID"
+       export aws_secret_key="$AWS_SECRET_ACCESS_KEY"
        set +x
        cd main && terraform apply -auto-approve
 
