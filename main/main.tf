@@ -20,7 +20,6 @@ module "jenkins_master" {
     instance_type = "t2.micro"
     jenkins_master_name = "Jenkins Master"
     ami = "ami-0080e4c5bc078760e"
-    slaves_count = "1"
     subnet_id = "${module.jenkins_network.subnet_id}"
     eip_id = "${module.jenkins_master.eip_id}"
     # get dns name so we can output a value for the jenkins login page
@@ -44,10 +43,9 @@ module "jenkins_slave" {
     sgrp_id = "${module.jenkins_master.sgrp_id}"
     # key name is passed from jenkins_master module and used here as a global.
     key_name = "${module.jenkins_master.key_name}"
-    public_ip = "${module.jenkins_slave.public_ip}"
 }
 # show user the slave IP address 
-output "jenkins_slave_dns" {
-    value = "${module.jenkins_slave.public_ip}"
-    depends_on = ["${module.jenkins_slave}"]
-}
+# output "jenkins_slave_dns" {
+#     value = "${module.jenkins_slave.public_ip}"
+#     depends_on = ["${module.jenkins_slave}"]
+# }
