@@ -1,8 +1,8 @@
 node {
-  environment {
-      AWS_ACCESS_KEY_ID     = credentials("$rohit_key")
-      AWS_SECRET_ACCESS_KEY = credentials("$rohit_secret")
-  }
+  // environment {
+  //     AWS_ACCESS_KEY_ID     = credentials("$rohit_key")
+  //     AWS_SECRET_ACCESS_KEY = credentials("$rohit_secret")
+  // }
  stage('checkout') { // for display purposes
     // Get some code from a GitHub repository
     git 'https://github.com/rksakhuja/jenkinsinf'
@@ -14,6 +14,11 @@ node {
  }
  }
  stage ('Terraform Apply') {
+   environment {
+      AWS_ACCESS_KEY_ID     = credentials("$rohit_key")
+      AWS_SECRET_ACCESS_KEY = credentials("$rohit_secret")
+  }
+   
         sh """
             echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
             echo "my key_id is: $AWS_ACCESS_KEY_ID"
