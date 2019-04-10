@@ -17,8 +17,8 @@ node {
         sh """
             echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
             echo "my key_id is: $AWS_ACCESS_KEY_ID"
-            export TF_VAR_rohit_key="$AWS_ACCESS_KEY_ID"
-            export TF_VAR_rohit_secret="$AWS_SECRET_ACCESS_KEY"
+            export AWS_ACCESS_KEY_ID= "$AWS_ACCESS_KEY_ID"
+            export AWS_SECRET_ACCESS_KEY= "$AWS_SECRET_ACCESS_KEY"
             cd main && terraform apply -auto-approve
 
           """
