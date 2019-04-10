@@ -1,7 +1,7 @@
 node {
   environment {
-      AWS_ACCESS_KEY_ID     = credentials("$rohit_aws_key")
-      AWS_SECRET_ACCESS_KEY = credentials("$rohit_aws_secret")
+      AWS_ACCESS_KEY_ID     = credentials("$rohit_key")
+      AWS_SECRET_ACCESS_KEY = credentials("$rohit_secret")
   }
  stage('checkout') { // for display purposes
     // Get some code from a GitHub repository
