@@ -20,7 +20,7 @@ pipeline {
                             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
                             terraform apply -auto-approve
                         '''
-                    }
+                    
                 }
             // Run Terraform init command from within specific directory listed in dir command Old:OpsAcademy-Terraform/aws/environment/dev
             
