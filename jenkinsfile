@@ -25,5 +25,12 @@ pipeline {
             // Run Terraform init command from within specific directory listed in dir command Old:OpsAcademy-Terraform/aws/environment/dev
             
         }
+        stage ('Terraform destroy') {
+            steps {
+                sh """
+                    pwd
+                """
+            }
+        }
     }
 }
