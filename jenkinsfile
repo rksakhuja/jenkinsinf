@@ -14,14 +14,16 @@ node {
  }
  }
  stage ('Terraform Apply') {
-                            withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
-                            string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+        withCredentials([string(credentialsId: 'rohit_aws_key', variable: 'AWS_ACCESS_KEY_ID'),
+        string(credentialsId: 'rohit_aws_secret', variable: 'AWS_SECRET_ACCESS_KEY')]) {
         sh """
+            echo "my secret_key is: $AWS_SECRET_ACCESS_KEY"
+            echo "my key_id is: $AWS_ACCESS_KEY_ID"
             export aws_access_key="$AWS_ACCESS_KEY_ID"
             export aws_secret_key="$AWS_SECRET_ACCESS_KEY"
             cd main && terraform apply -auto-approve
 
-        """
+          """
      }
   }
 }
