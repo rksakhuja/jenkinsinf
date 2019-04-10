@@ -28,9 +28,8 @@ pipeline {
         stage ('Terraform destroy') {
             steps {
                 sh """
-                    pwd
-                    ls -la
                     cd main
+                    terraform destroy
                 """
             }
         }
