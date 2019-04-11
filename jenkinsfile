@@ -20,13 +20,7 @@ pipeline {
                             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
                             terraform plan
                             """
-                        input {
-                            message "Approve release?"
-                            ok "Yes"
-                            parameters {
-                                string(name: 'IS_APPROVED', defaultValue: 'Yes', description: 'Approve?')
-                            }
-                        }
+                        input message "Approve release?"
                         sh """
                             terraform apply -auto-approve
                         """
